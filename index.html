@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://telegram.org; style-src 'self' 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title></title>
+<script src="https://telegram.org/js/telegram-web-app.js?65"></script>
+<style>
+  :root {
+    --bg: var(--tg-theme-bg-color, #ffffff);
+    --text: var(--tg-theme-text-color, #111111);
+    --hint: var(--tg-theme-hint-color, #8a8a8e);
+    --card: var(--tg-theme-secondary-bg-color, #f1f1f4);
+    --accent: var(--tg-theme-button-color, #2481cc);
+    --accent-text: var(--tg-theme-button-text-color, #ffffff);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); }
+  body { font: 16px/1.4 -apple-system, system-ui, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 480px; margin: 0 auto; padding: 16px; }
+  .title { font-size: 17px; font-weight: 600; margin: 0 0 12px; color: var(--hint); }
+  .balance { background: var(--card); border-radius: 16px; padding: 20px 16px; margin-bottom: 16px; }
+  .credits { font-size: 40px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .hint { color: var(--hint); font-size: 14px; margin-top: 4px; }
+  .methods { display: flex; gap: 8px; margin-bottom: 12px; }
+  .method { flex: 1; border: 0; border-radius: 12px; padding: 10px 8px; font: inherit; font-size: 15px;
+    background: var(--card); color: var(--text); }
+  .method.active { background: var(--accent); color: var(--accent-text); }
+  .method:disabled { opacity: 0.45; }
+  .badge { font-size: 12px; color: var(--hint); }
+  .sums { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .sum { border: 0; border-radius: 12px; padding: 14px 8px; font: inherit; background: var(--card);
+    color: var(--text); display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .sum b { font-size: 20px; }
+  .sum span { color: var(--hint); font-size: 14px; }
+  .sum:disabled { opacity: 0.45; }
+</style>
+</head>
+<body>
+<!-- The bot's mini app (ADR-0101): one <section> per section, app.js shows the one of v. -->
+<main id="app" hidden>
+  <section id="wallet" hidden>
+    <p id="title" class="title"></p>
+    <div class="balance">
+      <div id="credits" class="credits"></div>
+      <div id="label" class="hint"></div>
+    </div>
+    <div class="methods">
+      <button id="stars" class="method active" type="button"></button>
+      <button id="sbp" class="method" type="button" disabled><span id="sbp-name"></span> <span id="soon" class="badge"></span></button>
+    </div>
+    <div id="sums" class="sums"></div>
+    <p id="expired" class="hint" hidden></p>
+  </section>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>
